@@ -18,15 +18,33 @@
 !global $EXTERNAL_COMPONENT_BG_COLOR = "#CCCCCC"
 !global $EXTERNAL_COMPONENT_BORDER_COLOR = "#BFBFBF"
 
+!global $COMPONENT_BG_COLOR_GREEN = "#008B00"
+!global $COMPONENT_BORDER_COLOR_GREEN = "#78FFD8"
+!global $EXTERNAL_COMPONENT_BG_COLOR_GREEN = "#CCFFCC"
+!global $EXTERNAL_COMPONENT_BORDER_COLOR_GREEN = "#BFFFBF"
+
+!global $COMPONENT_BG_COLOR_ORANGE = "#FF7F00"
+!global $COMPONENT_BORDER_COLOR_ORANGE = "#8B4500"
+!global $EXTERNAL_COMPONENT_BG_COLOR_ORANGE = "#FF8F00"
+!global $EXTERNAL_COMPONENT_BORDER_COLOR_ORANGE = "#6B4500"
+
 ' Styling
 ' ##################################
 
 UpdateElementStyle("component", $COMPONENT_BG_COLOR, $COMPONENT_FONT_COLOR, $COMPONENT_BORDER_COLOR)
+UpdateElementStyle("component_newton", $COMPONENT_BG_COLOR_GREEN, $ELEMENT_FONT_COLOR_WHITE, $COMPONENT_BORDER_COLOR_GREEN)
+UpdateElementStyle("component_transformation", $COMPONENT_BG_COLOR_ORANGE, $ELEMENT_FONT_COLOR_BLACK, $COMPONENT_BORDER_COLOR_ORANGE)
 UpdateElementStyle("external_component", $EXTERNAL_COMPONENT_BG_COLOR, $COMPONENT_FONT_COLOR, $EXTERNAL_COMPONENT_BORDER_COLOR)
 
 ' shortcuts with default colors
 !unquoted procedure AddComponentTag($tagStereo, $bgColor="", $fontColor="", $borderColor="", $shadowing="", $shape="", $sprite="", $techn="", $legendText="", $legendSprite="")
   $addElementTagInclReuse("component", $tagStereo, $bgColor, $fontColor, $borderColor, $shadowing, $shape, $sprite, $techn, $legendText, $legendSprite)
+!endprocedure
+!unquoted procedure AddComponentTagNewton($tagStereo, $bgColor="", $fontColor="", $borderColor="", $shadowing="", $shape="", $sprite="", $techn="", $legendText="", $legendSprite="")
+  $addElementTagInclReuse("component_newton", $tagStereo, $bgColor, $fontColor, $borderColor, $shadowing, $shape, $sprite, $techn, $legendText, $legendSprite)
+!endprocedure
+!unquoted procedure AddComponentTagTransformation($tagStereo, $bgColor="", $fontColor="", $borderColor="", $shadowing="", $shape="", $sprite="", $techn="", $legendText="", $legendSprite="")
+  $addElementTagInclReuse("component_transformation", $tagStereo, $bgColor, $fontColor, $borderColor, $shadowing, $shape, $sprite, $techn, $legendText, $legendSprite)
 !endprocedure
 !unquoted procedure AddExternalComponentTag($tagStereo, $bgColor="", $fontColor="", $borderColor="", $shadowing="", $shape="", $sprite="", $techn="", $legendText="", $legendSprite="")
   $addElementTagInclReuse("external_component", $tagStereo, $bgColor, $fontColor, $borderColor, $shadowing, $shape, $sprite, $techn, $legendText, $legendSprite)
@@ -35,7 +53,7 @@ UpdateElementStyle("external_component", $EXTERNAL_COMPONENT_BG_COLOR, $COMPONEN
 ' Layout
 ' ##################################
 
-SetDefaultLegendEntries("person\nsystem\ncontainer\ncomponent\nexternal_person\nexternal_system\nexternal_container\nexternal_component\nenterprise_boundary\nsystem_boundary\ncontainer_boundary\nboundary")
+SetDefaultLegendEntries("person\nsystem\ncontainer\ncomponent\ncomponent_green\nexternal_person\nexternal_system\nexternal_container\nexternal_component\nenterprise_boundary\nsystem_boundary\ncontainer_boundary\nboundary")
 
 !procedure LAYOUT_WITH_LEGEND()
 hide stereotype
@@ -45,10 +63,11 @@ legend right
 |<$SYSTEM_BG_COLOR> system |
 |<$CONTAINER_BG_COLOR> container |
 |<$COMPONENT_BG_COLOR> component |
+|<$COMPONENT_BG_COLOR_GREEN> component_green |
 |<$EXTERNAL_PERSON_BG_COLOR> external person |
 |<$EXTERNAL_SYSTEM_BG_COLOR> external system |
 |<$EXTERNAL_CONTAINER_BG_COLOR> external container |
-|<$EXTERNAL_COMPONENT_BG_COLOR> external component |
+|<$EXTERNAL_COMPONENT_BG_COLOR_GREEN> external component_green |
 endlegend
 !endprocedure
 
@@ -63,6 +82,30 @@ endlegend
 !$sprite=$toElementArg($sprite, $tags, "ElementTagSprite", "component")
 !$techn=$toElementArg($techn, $tags, "ElementTagTechn", "component")
 rectangle "$getComponent($label, $techn, $descr, $sprite)$getProps()" $toStereos("component",$tags) as $alias $getLink($link)
+!endprocedure
+
+!unquoted procedure Component_Newton($alias, $label, $techn="", $descr="", $sprite="", $tags="", $link="")
+!$sprite=$toElementArg($sprite, $tags, "ElementTagSprite", "component_newton")
+!$techn=$toElementArg($techn, $tags, "ElementTagTechn", "component_newton")
+rectangle "$getComponent($label, $techn, $descr, $sprite)$getProps()" $toStereos("component_newton",$tags) as $alias $getLink($link)
+!endprocedure
+
+!unquoted procedure ComponentDb_Newton($alias, $label, $techn="", $descr="", $sprite="", $tags="", $link="")
+!$sprite=$toElementArg($sprite, $tags, "ElementTagSprite", "component_newton")
+!$techn=$toElementArg($techn, $tags, "ElementTagTechn", "component_newton")
+database "$getComponent($label, $techn, $descr, $sprite)$getProps()" $toStereos("component_newton",$tags) as $alias $getLink($link)
+!endprocedure
+
+!unquoted procedure Component_Transformation($alias, $label, $techn="", $descr="", $sprite="", $tags="", $link="")
+!$sprite=$toElementArg($sprite, $tags, "ElementTagSprite", "component_transformation")
+!$techn=$toElementArg($techn, $tags, "ElementTagTechn", "component_transformation")
+rectangle "$getComponent($label, $techn, $descr, $sprite)$getProps()" $toStereos("component_transformation",$tags) as $alias $getLink($link)
+!endprocedure
+
+!unquoted procedure ComponentDb_Transformation($alias, $label, $techn="", $descr="", $sprite="", $tags="", $link="")
+!$sprite=$toElementArg($sprite, $tags, "ElementTagSprite", "component_transformation")
+!$techn=$toElementArg($techn, $tags, "ElementTagTechn", "component_transformation")
+database "$getComponent($label, $techn, $descr, $sprite)$getProps()" $toStereos("component_transformation",$tags) as $alias $getLink($link)
 !endprocedure
 
 !unquoted procedure ComponentDb($alias, $label, $techn="", $descr="", $sprite="", $tags="", $link="")

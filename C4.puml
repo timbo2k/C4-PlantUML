@@ -19,6 +19,8 @@ rectangle C4VersionDetailsArea <<legendArea>> [
 ' ##################################
 
 !global $ELEMENT_FONT_COLOR = "#FFFFFF"
+!global $ELEMENT_FONT_COLOR_WHITE = "#FFFFFF"
+!global $ELEMENT_FONT_COLOR_BLACK = "#000000"
 
 !global $ARROW_COLOR = "#666666"
 

@@ -16,9 +16,21 @@
 !global $EXTERNAL_CONTAINER_BG_COLOR = "#B3B3B3"
 !global $EXTERNAL_CONTAINER_BORDER_COLOR = "#A6A6A6"
 
+!global $CONTAINER_BG_COLOR_GREEN = "#008B00"
+!global $CONTAINER_BORDER_COLOR_GREEN = "#78FFD8"
+!global $EXTERNAL_CONTAINER_BG_COLOR_GREEN = "#CCFFCC"
+!global $EXTERNAL_CONTAINER_BORDER_COLOR_GREEN = "#BFFFBF"
+
+!global $CONTAINER_BG_COLOR_ORANGE = "#FF7F00"
+!global $CONTAINER_BORDER_COLOR_ORANGE = "#8B4500"
+!global $EXTERNAL_CONTAINER_BG_COLOR_ORANGE = "#FF8F00"
+!global $EXTERNAL_CONTAINER_BORDER_COLOR_ORANGE = "#6B4500"
+
 ' Styling
 ' ##################################
 UpdateElementStyle("container", $CONTAINER_BG_COLOR, $ELEMENT_FONT_COLOR, $CONTAINER_BORDER_COLOR)
+UpdateElementStyle("container_newton", $CONTAINER_BG_COLOR_GREEN, $ELEMENT_FONT_COLOR_WHITE, $CONTAINER_BORDER_COLOR_GREEN)
+UpdateElementStyle("container_transformation", $CONTAINER_BG_COLOR_ORANGE, $ELEMENT_FONT_COLOR_BLACK, $CONTAINER_BORDER_COLOR_ORANGE)
 UpdateElementStyle("external_container", $EXTERNAL_CONTAINER_BG_COLOR, $ELEMENT_FONT_COLOR, $EXTERNAL_CONTAINER_BORDER_COLOR)
 
 UpdateBoundaryStyle("container", $bgColor=$BOUNDARY_BG_COLOR, $fontColor=$BOUNDARY_COLOR, $borderColor=$BOUNDARY_COLOR, $type="Container")
@@ -26,6 +38,12 @@ UpdateBoundaryStyle("container", $bgColor=$BOUNDARY_BG_COLOR, $fontColor=$BOUNDA
 ' shortcuts with default colors
 !unquoted procedure AddContainerTag($tagStereo, $bgColor="", $fontColor="", $borderColor="", $shadowing="", $shape="", $sprite="", $techn="", $legendText="", $legendSprite="")
   $addElementTagInclReuse("container", $tagStereo, $bgColor, $fontColor, $borderColor, $shadowing, $shape, $sprite, $techn, $legendText, $legendSprite)
+!endprocedure
+!unquoted procedure AddContainerTagNewton($tagStereo, $bgColor="", $fontColor="", $borderColor="", $shadowing="", $shape="", $sprite="", $techn="", $legendText="", $legendSprite="")
+  $addElementTagInclReuse("container_newton", $tagStereo, $bgColor, $fontColor, $borderColor, $shadowing, $shape, $sprite, $techn, $legendText, $legendSprite)
+!endprocedure
+!unquoted procedure AddContainerTagTransformation($tagStereo, $bgColor="", $fontColor="", $borderColor="", $shadowing="", $shape="", $sprite="", $techn="", $legendText="", $legendSprite="")
+  $addElementTagInclReuse("container_transformation", $tagStereo, $bgColor, $fontColor, $borderColor, $shadowing, $shape, $sprite, $techn, $legendText, $legendSprite)
 !endprocedure
 !unquoted procedure AddExternalContainerTag($tagStereo, $bgColor="", $fontColor="", $borderColor="", $shadowing="", $shape="", $sprite="", $techn="", $legendText="", $legendSprite="")
   $addElementTagInclReuse("external_container", $tagStereo, $bgColor, $fontColor, $borderColor, $shadowing, $shape, $sprite, $techn, $legendText, $legendSprite)
@@ -47,6 +65,7 @@ legend right
 |<$PERSON_BG_COLOR> person |
 |<$SYSTEM_BG_COLOR> system |
 |<$CONTAINER_BG_COLOR> container |
+|<$CONTAINER_BG_COLOR_GREEN> container_green |
 |<$EXTERNAL_PERSON_BG_COLOR> external person |
 |<$EXTERNAL_SYSTEM_BG_COLOR> external system |
 |<$EXTERNAL_CONTAINER_BG_COLOR> external container |
@@ -64,6 +83,18 @@ endlegend
 !$sprite=$toElementArg($sprite, $tags, "ElementTagSprite", "container")
 !$techn=$toElementArg($techn, $tags, "ElementTagTechn", "container")
 rectangle "$getContainer($label, $techn, $descr, $sprite)$getProps()" $toStereos("container", $tags) as $alias $getLink($link)
+!endprocedure
+
+!unquoted procedure Container_Newton($alias, $label, $techn="", $descr="", $sprite="", $tags="", $link="")
+!$sprite=$toElementArg($sprite, $tags, "ElementTagSprite", "container_newton")
+!$techn=$toElementArg($techn, $tags, "ElementTagTechn", "container_newton")
+rectangle "$getContainer($label, $techn, $descr, $sprite)$getProps()" $toStereos("container_newton", $tags) as $alias $getLink($link)
+!endprocedure
+
+!unquoted procedure Container_Transformation($alias, $label, $techn="", $descr="", $sprite="", $tags="", $link="")
+!$sprite=$toElementArg($sprite, $tags, "ElementTagSprite", "container_transformation")
+!$techn=$toElementArg($techn, $tags, "ElementTagTechn", "container_transformation")
+rectangle "$getContainer($label, $techn, $descr, $sprite)$getProps()" $toStereos("container_transformation", $tags) as $alias $getLink($link)
 !endprocedure
 
 !unquoted procedure ContainerDb($alias, $label, $techn="", $descr="", $sprite="", $tags="", $link="")
